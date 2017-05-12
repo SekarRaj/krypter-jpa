@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Employee {
 	@Id
 	@Column(name="id")
-	private int id;
+	private String id;
 	
 	@Column(name="firstName")
 	private String firstName;
@@ -23,18 +23,18 @@ public class Employee {
 
 	public Employee(){}
 	
-	public Employee(int id, String firstName, String lastName, String department){
+	public Employee(String id, String firstName, String lastName, String department){
 		this.setId(id);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setDepartment(department);
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
