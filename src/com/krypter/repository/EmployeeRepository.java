@@ -2,35 +2,35 @@ package com.krypter.repository;
 
 import javax.inject.Inject;
 
+import com.krypter.dal.DataAccessLayer;
 import com.krypter.data.Employee;
 import com.krypter.identifiers.IdentifierGenerator;
 
 public class EmployeeRepository {
-	public static volatile EmployeeRepository INSTANCE = EmployeeRepository.createInstance();
+	private static volatile EmployeeRepository INSTANCE;
 	private static Object lock = new Object();
+
+	@Inject
+	private IdentifierGenerator idGenerator;
 
 	private EmployeeRepository() {
 	}
 
-	@Inject
-	IdentifierGenerator idGenerator;
-
-	private static EmployeeRepository createInstance() {
-		if (INSTANCE != null) {
-			return INSTANCE;
-		} else {
+	public static EmployeeRepository getInstance() {
+		if (INSTANCE == null) {
 			synchronized (lock) {
-				return new EmployeeRepository();
+				if (INSTANCE == null)
+					INSTANCE = new EmployeeRepository();
 			}
 		}
-	}
-
-	public EmployeeRepository getInstance() {
-		return EmployeeRepository.createInstance();
+		return INSTANCE;
 	}
 
 	public void createEmployee(String firstName, String lastName, String dob) {
-		Employee emp = new Employee(idGenerator.generateId(), firstName, lastName, dob);
-
+		DataAccessLayer.getEntityManager().getTransaction().begin();
+		String id = idGenerator.generateId();
+		Employee emp = new Employee(id, firstName, lastName, dob);
+		DataAccessLayer.getEntityManager().persist(emp);
+		DataAccessLayer.getEntityManager().getTransaction().commit();
 	}
 }
