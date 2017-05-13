@@ -5,8 +5,8 @@
 	<persistence-unit name="krypter-jpa">
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.ibm.as400.access.AS400JDBCDriver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:as400://harainbw:446/rajarra" />
-			<property name="javax.persistence.jdbc.user" value="rajarra" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:as400://pub400.com:446/sekar2" />
+			<property name="javax.persistence.jdbc.user" value="Sekar" />
 			<property name="javax.persistence.jdbc.password" value="Alt1source" />
 
 			<property name="hibernate.archive.autodetection" value="class" />
