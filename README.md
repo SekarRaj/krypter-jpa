@@ -5,12 +5,10 @@ Krypter JPA Repository
 import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
-
 public class CoinChange {
     public static Map<Integer, Integer> totalWays = new HashMap<>();
     public static void numberOfWays(int[] denom, int amount) {
         Arrays.sort(denom);
-
         for (int i = 0; i <= denom.length; i++) {
             int curDenom = denom[i];
 
